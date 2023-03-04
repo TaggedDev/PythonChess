@@ -1,9 +1,17 @@
 class Slot:
-    def __init__(self, x, y):
-        self._symbol = '▓' if (x+y) % 2 == 0 else '░'
+    def __init__(self, x, y, figure=None):
+        self._symbol = '▓' if (x + y) % 2 == 0 else '░'
         self._is_occupied = False
         self._position = [x, y]
-        self._figure = None
+        self._figure = figure
+
+    @property
+    def figure(self):
+        return self._figure
+
+    @figure.setter
+    def figure(self, value):
+        self._figure = value
 
     @property
     def position(self):
@@ -16,4 +24,6 @@ class Slot:
         self._position = value
 
     def __repr__(self):
-        return self._symbol
+        if self.figure is None:
+            return self._symbol
+        return str(self.figure)

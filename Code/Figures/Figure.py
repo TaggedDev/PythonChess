@@ -10,16 +10,16 @@ class Figure(ABC):
         self._icon = icon
         self._board = board
 
-    def move_towards(self, start, end):
-        x1, y1 = self.translate_algebric_notation(start)
-        x2, y2 = self.translate_algebric_notation(end)
-        self.implement_move(x1, y1, x2, y2)
+    @static
+
+    def move_towards(self, x2, y2):
+        self.implement_move(self.x, self.y, x2, y2)
 
     @staticmethod
     def translate_algebric_notation(string):
         try:
-            x = 8 - ord(string[0]) - 97
-            y = 8 - int(string[1])
+            x = 8 - int(string[1])
+            y = ord(string[0]) - 97
             return x, y
         except ValueError as e:
             raise ValueError('Invalid notation values')

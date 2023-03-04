@@ -1,5 +1,6 @@
-from Desk.Slot import Slot
-from Figures.Pawn import Pawn
+from PythonChess.Code.Desk.Slot import Slot
+from PythonChess.Code.Figures.Figure import Figure
+from PythonChess.Code.Figures.Pawn import Pawn
 
 
 class Board:
@@ -16,9 +17,11 @@ class Board:
             row = []
             for y in range(0, 8):
                 if x == 1:
-                    row.append(Pawn(x, y, 'p', False, self))
+                    pawn = Pawn(x, y, 'p', False, self)
+                    row.append(Slot(x, y, pawn))
                 elif x == 6:
-                    row.append(Pawn(x, y, 'p', True, self))
+                    pawn = Pawn(x, y, 'p', True, self)
+                    row.append(Slot(x, y, pawn))
                 else:
                     row.append(Slot(x, y))
             desk.append(row)
@@ -37,6 +40,7 @@ class Board:
                 print(each, end=' ')
             print()
 
-    def move_pawn(self):
-        self.deck[1][1].move_towards('f1', 'f5')
-
+    def handle_player_turn(self, turn):
+        x1, y1 = Figure.translate_algebric_notation(turn[:2])
+        x2, y2 = Figure.translate_algebric_notation(turn[2:])
+        self.deck[x1][y1].figure.move_towards(x2, y2)
