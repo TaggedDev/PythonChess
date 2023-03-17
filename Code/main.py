@@ -10,7 +10,8 @@ if __name__ == '__main__':
     if slot is not None:
         if slot.process_move(col_end, row_end):
             Board.handle_visual_changes(row_start, col_start, row_end, col_end)
+            print('True')
+        else:
+            print('False')
 
     Board.display_board()
-
-
