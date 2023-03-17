@@ -1,4 +1,4 @@
-from Code import Piece
+from Code.Figures.Bishop import Bishop
 from Code.Figures.Knight import Knight
 from Code.Figures.Pawn import Pawn
 from Code.Figures.Rook import Rook
@@ -10,10 +10,10 @@ def instantiate_board():
     # Whites
     board[0][0] = Rook('white', 0, 0)
     board[0][1] = Knight('white', 0, 1)
-    '''self.board[0][2] = Bishop('white', self.board)
-    self.board[0][3] = Queen('white', self.board)
-    self.board[0][4] = King('white', self.board)
-    self.board[0][5] = Bishop('white', self.board)'''
+    board[0][2] = Bishop('white', 0, 2)
+    '''self.board[0][3] = Queen('white', self.board)
+    self.board[0][4] = King('white', self.board)'''
+    board[0][5] = Bishop('white', 0, 5)
     board[0][6] = Knight('white', 0, 6)
     board[0][7] = Rook('white', 0, 7)
     for i in range(8):
@@ -22,17 +22,19 @@ def instantiate_board():
     # Blacks
     board[7][0] = Rook('black', 7, 0)
     board[7][1] = Knight('black', 7, 1)
-    '''self.board[7][2] = Bishop('black', self.board)
-    self.board[7][3] = Queen('black', self.board)
-    self.board[7][4] = King('black', self.board)
-    self.board[7][5] = Bishop('black', self.board)'''
+    board[7][2] = Bishop('black', 7, 2)
+    '''self.board[7][3] = Queen('black', self.board)
+    self.board[7][4] = King('black', self.board)'''
+    board[7][5] = Bishop('black', 7, 2)
     board[7][6] = Knight('black', 7, 6)
     board[7][7] = Rook('black', 7, 7)
     for i in range(8):
         board[6][i] = Pawn('black', 1, i)
 
-    board[2][2] = Knight('white', 2, 2)
-    board[4][3] = Pawn('white', 4, 2)
+    board[2][2] = Bishop('white', 2, 2)
+    board[4][4] = Pawn('white', 4, 4)
+    board[5][5] = Pawn('white', 5, 5)
+
 
 
 def algebraic_to_index(algebraic_notation):
