@@ -7,7 +7,7 @@ class ChessPiece(ABC):
         self.color = color
 
     @abstractmethod
-    def process_move(self, x_end, y_end):
+    def process_move(self, x_end, y_end, is_white):
         pass
 
     def update_position(self, y, x):

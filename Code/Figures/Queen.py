@@ -9,7 +9,10 @@ class Queen(ChessPiece):
     def __str__(self):
         return 'Q'
 
-    def process_move(self, x_end, y_end):
+    def process_move(self, x_end, y_end, color):
+        if color != self.color:
+            return False
+
         row_start, col_start = self.position[0], self.position[1]
         row_end, col_end = x_end, y_end
 

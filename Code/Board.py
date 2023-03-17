@@ -34,8 +34,6 @@ def instantiate_board():
     for i in range(8):
         board[6][i] = Pawn('black', 6, i)
 
-    board[2][1] = Pawn('black', 2, 1)
-
 
 def algebraic_to_index(algebraic_notation):
     file = ord(algebraic_notation[0]) - ord('a')
