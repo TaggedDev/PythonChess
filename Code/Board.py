@@ -1,4 +1,5 @@
 from Code.Figures.Bishop import Bishop
+from Code.Figures.King import King
 from Code.Figures.Knight import Knight
 from Code.Figures.Pawn import Pawn
 from Code.Figures.Queen import Queen
@@ -13,7 +14,7 @@ def instantiate_board():
     board[0][1] = Knight('white', 0, 1)
     board[0][2] = Bishop('white', 0, 2)
     board[0][3] = Queen('white', 0, 3)
-    '''self.board[0][4] = King('white', self.board)'''
+    board[0][4] = King('white', 0, 4)
     board[0][5] = Bishop('white', 0, 5)
     board[0][6] = Knight('white', 0, 6)
     board[0][7] = Rook('white', 0, 7)
@@ -25,16 +26,15 @@ def instantiate_board():
     board[7][1] = Knight('black', 7, 1)
     board[7][2] = Bishop('black', 7, 2)
     board[7][3] = Queen('black', 7, 3)
-    '''self.board[7][4] = King('black', self.board)'''
+    board[7][4] = King('black', 7, 4)
     board[7][5] = Bishop('black', 7, 2)
     board[7][6] = Knight('black', 7, 6)
     board[7][7] = Rook('black', 7, 7)
     for i in range(8):
         board[6][i] = Pawn('black', 1, i)
 
-    board[2][2] = Queen('white', 2, 2)
-    board[4][4] = Pawn('black', 4, 4)
-    board[2][5] = Pawn('white', 2, 5)
+    board[2][2] = King('white', 2, 2)
+    board[2][3] = Pawn('black', 2, 3)
 
 
 def algebraic_to_index(algebraic_notation):
