@@ -4,6 +4,7 @@ from Code.Figures.Knight import Knight
 from Code.Figures.Pawn import Pawn
 from Code.Figures.Queen import Queen
 from Code.Figures.Rook import Rook
+from Code.Piece import ChessPiece
 
 board = [[None] * 8 for _ in range(8)]
 
@@ -31,10 +32,9 @@ def instantiate_board():
     board[7][6] = Knight('black', 7, 6)
     board[7][7] = Rook('black', 7, 7)
     for i in range(8):
-        board[6][i] = Pawn('black', 1, i)
+        board[6][i] = Pawn('black', 6, i)
 
-    board[2][2] = King('white', 2, 2)
-    board[2][3] = Pawn('black', 2, 3)
+    board[2][1] = Pawn('black', 2, 1)
 
 
 def algebraic_to_index(algebraic_notation):
@@ -58,4 +58,5 @@ def display_board():
 
 def handle_visual_changes(row_start, col_start, row_end, col_end):
     board[col_end][row_end] = board[col_start][row_start]
+    board[col_end][row_end].update_position(row_end, col_end)
     board[col_start][row_start] = None

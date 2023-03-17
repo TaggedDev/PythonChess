@@ -4,8 +4,7 @@ from Code.Piece import ChessPiece
 
 class Bishop(ChessPiece):
     def __init__(self, color, x, y):
-        self.position = x, y
-        self.color = color
+        super().__init__(color, x, y)
 
     def __str__(self):
         return 'B'

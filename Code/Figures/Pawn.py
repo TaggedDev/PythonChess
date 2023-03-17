@@ -5,8 +5,7 @@ from Code.Piece import ChessPiece
 class Pawn(ChessPiece):
 
     def __init__(self, color, x, y):
-        self.position = x, y
-        self.color = color
+        super().__init__(color, x, y)
 
     def __str__(self):
         return 'p'
@@ -15,42 +14,42 @@ class Pawn(ChessPiece):
         row_start, col_start = self.position[0], self.position[1]
         row_end, col_end = x_end, y_end
 
-        # Проверяем, что пешка не атакует свою фигуру
-        end_slot = Board.board[row_end][col_end]
-        if end_slot is not None:
-            if end_slot.color == self.color:
-                return False
-            # Проверяем, что пешка атакует фигуру противника только по диагонали
-            else:
-                if self.color == 'white':
-                    return row_end - row_start == 1 and abs(col_end - col_start) == 1
-                else:
-                    return row_start - row_end == 1 and abs(col_end - col_start) == 1
-
-
-        # Проверка движения пешки строго по вертикали на <= 2 по y
-        if col_end != col_start or abs(col_end - col_start) > 2:
-            return False
-
-        # Проверка движения на 2 строго при стартовой позиции
+        # Проверяем, что пешка двигается только вперед
         if self.color == 'white':
-            delta = row_end - row_start
-            if row_start != 1 and delta == 2:
+            if row_end <= row_start:
                 return False
         else:
-            delta = row_start - row_end
-            if row_start != 6 and delta == 2:
+            if row_end >= row_start:
                 return False
 
-
-        # Проверка на перепрыгивание фигуры при delta == 2
-        if abs(row_start - row_end) == 2:
+        # Проверяем, что пешка двигается на одну или две клетки вперед при первом ходе
+        if col_start == col_end:
             if self.color == 'white':
-                if Board.board[row_start + 1][col_start] is not None:
+                if row_start == 1 and row_end == 3:
+                    if Board.board[2][col_start] is not None:
+                        return False
+                elif row_end - row_start == 1:
+                    if Board.board[row_end][col_end] is not None:
+                        return False
+                elif row_end - row_start != 1:
                     return False
             else:
-                if Board.board[row_start - 1][col_start] is not None:
+                if row_start == 6 and row_end == 4:
+                    if Board.board[5][col_start] is not None:
+                        return False
+                elif row_start - row_end == 1:
+                    if Board.board[row_end][col_end] is not None:
+                        return False
+                elif row_end - row_start != 1:
                     return False
+        else:
+            # Проверяем, что пешка двигается по диагонали только для захвата фигуры противника
+            if abs(col_start - col_end) != 1 or abs(row_start - row_end) != 1:
+                return False
 
-        # Если все проверки пройдены, то ход совершается успешно
+            # Проверяем, что на конечной позиции находится фигура противника
+            if Board.board[row_end][col_end] is None or Board.board[row_end][col_end].color == self.color:
+                return False
+
+        # Если все проверки прошли успешно, то перемещаем пешку на новую позицию
         return True
