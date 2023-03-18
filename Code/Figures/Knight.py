@@ -7,7 +7,7 @@ class Knight(ChessPiece):
         super().__init__(color, x, y)
 
     def __str__(self):
-        return 'H'
+        return f'{self.color[0]}H'
 
     def process_move(self, x_end, y_end, color):
         if color != self.color:

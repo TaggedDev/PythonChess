@@ -7,7 +7,7 @@ class Rook(ChessPiece):
         super().__init__(color, x, y)
 
     def __str__(self):
-        return 'R'
+        return f'{self.color[0]}R'
 
     def process_move(self, x_end, y_end, color):
         if color != self.color:

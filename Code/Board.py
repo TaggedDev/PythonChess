@@ -42,13 +42,13 @@ def algebraic_to_index(algebraic_notation):
 
 
 def display_board():
-    print('  a b c d e f g h')
+    print('  aa bb cc dd ee ff gg hh')
     for row in range(8):
         print(row + 1, end=' ')
         for col in range(8):
             piece = board[row][col]
             if piece is None:
-                print('N', end=" ")
+                print('__', end=" ")
             else:
                 print(board[row][col], end=" ")
         print()

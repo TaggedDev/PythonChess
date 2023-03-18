@@ -8,7 +8,7 @@ class Pawn(ChessPiece):
         super().__init__(color, x, y)
 
     def __str__(self):
-        return 'p'
+        return f'{self.color[0]}p'
 
     def process_move(self, x_end, y_end, color):
         if color != self.color:
