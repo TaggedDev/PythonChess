@@ -1,5 +1,5 @@
-from Code import Board
-from Code.Piece import ChessPiece
+import Board
+from Piece import ChessPiece
 
 
 class Pawn(ChessPiece):
@@ -10,7 +10,14 @@ class Pawn(ChessPiece):
     def __str__(self):
         return f'{self.color[0]}p'
 
-    def process_move(self, x_end, y_end, color):
+    def process_move(self, x_end, y_end, color=None):
+
+        if color is None:
+            if self.color == 'white':
+                color = 'black'
+            else:
+                color = 'white'
+
         if color != self.color:
             return False
 

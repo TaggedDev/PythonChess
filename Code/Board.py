@@ -1,10 +1,10 @@
-from Code.Figures.Bishop import Bishop
-from Code.Figures.King import King
-from Code.Figures.Knight import Knight
-from Code.Figures.Pawn import Pawn
-from Code.Figures.Queen import Queen
-from Code.Figures.Rook import Rook
-from Code.Piece import ChessPiece
+import Piece
+from Figures.Bishop import Bishop
+from Figures.King import King
+from Figures.Knight import Knight
+from Figures.Pawn import Pawn
+from Figures.Queen import Queen
+from Figures.Rook import Rook
 
 board = [[None] * 8 for _ in range(8)]
 
@@ -25,11 +25,11 @@ def instantiate_board():
     # Blacks
     board[7][0] = Rook('black', 7, 0)
     board[7][1] = Knight('black', 7, 1)
-    board[7][2] = Bishop('black', 7, 2)
-    board[7][3] = Queen('black', 7, 3)
+    #board[7][2] = Bishop('black', 7, 2)
+    #board[7][3] = Queen('black', 7, 3)
     board[7][4] = King('black', 7, 4)
-    board[7][5] = Bishop('black', 7, 2)
-    board[7][6] = Knight('black', 7, 6)
+    #board[7][5] = Bishop('black', 7, 2)
+    #board[7][6] = Knight('black', 7, 6)
     board[7][7] = Rook('black', 7, 7)
     for i in range(8):
         board[6][i] = Pawn('black', 6, i)
@@ -58,3 +58,36 @@ def handle_visual_changes(row_start, col_start, row_end, col_end):
     board[col_end][row_end] = board[col_start][row_start]
     board[col_end][row_end].update_position(row_end, col_end)
     board[col_start][row_start] = None
+
+def is_slot_attacked(col, row):
+    for row in range(8):
+        for col in range(8):
+            slot = board[row][col]
+            if slot is not None:
+                if slot.process_move(col , row):
+                    return True
+    return False
+
+def handle_visual_changes_castling(is_white: bool, type: str) -> None:
+    if type == 'short':
+        if is_white:
+            board[0][5] = board[0][7]
+            board[0][6] = board[0][4]
+            board[0][4] = None
+            board[0][7] = None
+        else:
+            board[7][5] = board[7][7]
+            board[7][6] = board[7][4]
+            board[7][4] = None
+            board[7][7] = None
+    else:
+        if is_white:
+            board[0][2] = board[0][0]
+            board[0][3] = board[0][4]
+            board[0][4] = None
+            board[0][0] = None
+        else:
+            board[7][2] = board[7][0]
+            board[7][3] = board[7][4]
+            board[7][4] = None
+            board[7][0] = None

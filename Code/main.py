@@ -1,4 +1,4 @@
-from Code import Board
+import Board
 
 
 def validate_algebraic(string):
@@ -41,6 +41,34 @@ if __name__ == '__main__':
                 else:
                     print('Невозможно совершить ход')
 
+        elif player_turn == '0-0':
+            indices = [7, 0]
+            is_castling_possible = True
+            for i in range(5, 7):
+                if Board.board[indices[is_white]][i] is not None:
+                    print(f'Ход сделать невозможно, слот {indices[is_white], i} занят')
+                    is_castling_possible = False
+                elif Board.is_slot_attacked(indices[is_white], i):
+                    print(f'Ход сделать невозможно, слот {indices[is_white], i} атакован')
+                    is_castling_possible = False
+
+            if is_castling_possible:
+                Board.handle_visual_changes_castling(is_white=is_white, type='short')
+
+        elif player_turn == '0-0-0':
+            indices = [7, 0]
+            for i in range(1, 4):
+                if Board.board[indices[is_white]][i] is not None:
+                    print('Ход сделать невозможно')
+                elif Board.is_slot_attacked(indices[is_white], i):
+                    print('Ход сделать невозможно')
+                else:
+                    Board.handle_visual_changes_castling(is_white=is_white, type='long')
+
+
+            pass
+        elif player_turn == '0-0':
+            pass
         elif player_turn == 'redo':
             if len(turns) == 0:
                 print(f'Это первый ход')

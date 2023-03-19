@@ -1,5 +1,5 @@
-from Code import Board
-from Code.Piece import ChessPiece
+import Board
+from Piece import ChessPiece
 
 
 class Queen(ChessPiece):
@@ -9,9 +9,12 @@ class Queen(ChessPiece):
     def __str__(self):
         return f'{self.color[0]}Q'
 
-    def process_move(self, x_end, y_end, color):
-        if color != self.color:
-            return False
+    def process_move(self, x_end, y_end, color=None):
+        if color is None:
+            if self.color == 'white':
+                color = 'black'
+            else:
+                color = 'white'
 
         row_start, col_start = self.position[0], self.position[1]
         row_end, col_end = x_end, y_end

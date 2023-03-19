@@ -1,5 +1,5 @@
-from Code import Board
-from Code.Piece import ChessPiece
+import Board
+from Piece import ChessPiece
 
 
 class Bishop(ChessPiece):
@@ -9,7 +9,14 @@ class Bishop(ChessPiece):
     def __str__(self):
         return f'{self.color[0]}B'
 
-    def process_move(self, x_end, y_end, color):
+    def process_move(self, x_end, y_end, color=None):
+
+        if color is None:
+            if self.color == 'white':
+                color = 'black'
+            else:
+                color = 'white'
+
         if color != self.color:
             return False
         row_start, col_start = self.position[0], self.position[1]
